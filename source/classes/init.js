@@ -7,6 +7,8 @@ var params = {
 	episode: 0,
 };
 
+var tries = 0;
+
 function init() {
 
 	$("#BobMovie").watch('display', function() {
@@ -27,21 +29,43 @@ function init() {
 
 		set_type();
 
-		$.getJSON(get_query(), function(data) {
-
-			if ( !data[0] ) {
-				rating = 'Error. <a target="_TOP" href="http://www.imdb.com/find?q=' + title + '">Search manually</a>';
-			} else {
-				rating = data[0].rating ? data[0].rating.toFixed(1) : 'Not yet rated';
-				rating = '<a target="_TOP" href="' + data[0].imdb_url + '">' + rating + '</a> / 10';
-			}
-
-			set_rating(rating);
-
-		});
+		find_rating( get_query() );
 
 	});
 
+}
+
+function find_rating( query ) {
+
+	$.getJSON(query, function(data) {
+
+		if ( !data[0] ) {
+			// Attempt one more try with an empty year
+			if ( !tries ) {
+				tries++;
+				set_year(false);
+				find_rating( get_query() );
+			} else {
+				rating = 'Error. ' + get_search_link();
+			}
+		} else {
+			rating = data[0].rating ? data[0].rating.toFixed(1) : 'Not yet rated';
+			rating = '<a target="_TOP" href="' + data[0].imdb_url + '">' + rating + '</a> / 10';
+
+			if ( tries ) {
+				rating += '<br/><br/>(Tried twice to find IMDb rating. May be inaccurate. ' + get_search_link() + ' to confirm.)';
+			}
+			tries = 0;
+		}
+
+		set_rating(rating);
+
+	});
+
+}
+
+function get_search_link() {
+	return '<a target="_TOP" href="http://www.imdb.com/find?q=' + params.q + '">Search manually</a>';
 }
 
 function get_year() {
@@ -49,18 +73,23 @@ function get_year() {
 	if ( year.length != 4 ) {
 		year = year.substring( 0, 4 );
 	}
+
 	return year;
 }
 
 function get_title() {
-	return $('.bobMovieHeader > span.title').text();
+	var title = $('.bobMovieHeader > span.title').text();
+	title = title.replace('(U.K.)', '');
+	title = title.replace('(U.S.)', '');
+
+	return title;
 }
 
 function set_type() {
 	var rating = $('.mpaaRating').text();
 	var duration = $('.duration').text();
 
-	params.mt = (rating.indexOf('TV') != -1 || duration.indexOf('Episodes') != -1 || duration.indexOf('Seasons') != -1 || duration.indexOf('Series') != -1 ) ? 'TVS' : 'M';
+	params.mt = (rating.indexOf('TV') != -1 || duration.indexOf('Episode') != -1 || duration.indexOf('Season') != -1 || duration.indexOf('Serie') != -1 ) ? 'TVS' : 'M';
 }
 
 function get_query() {
@@ -68,8 +97,12 @@ function get_query() {
 }
 
 function set_year(year) {
-	params.yg = 1;
-	params.year = year;
+	if ( year ) {
+		params.yg = 1;
+		params.year = year;
+	} else {
+		params.yg = 0;
+	}
 }
 
 function set_title(title) {
