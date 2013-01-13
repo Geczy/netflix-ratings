@@ -14,8 +14,10 @@ function init() {
 	$("#BobMovie").watch('display', function() {
 
 		// Don't continue if the tooltip is hidden
-		if ( $(this).css('display') == 'none' )
+		if ( $(this).css('display') == 'none' ) {
+			set_rating('');
 			return false;
+		}
 
 		$('div.info dl').append('<dt>IMDB Rating:</dt><dd id="imdb_rating"></dd>');
 

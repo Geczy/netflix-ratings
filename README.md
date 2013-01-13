@@ -10,10 +10,8 @@ Quick start
 
 You can test that it works without signing up for Netflix by [browsing the free catalog](https://signup.netflix.com/BrowseSelection).
 
-1. Go to Chrome > Tools > Extensions and enable Developer mode
-2. [Download the latest version](https://github.com/Geczy/netflix-imdb-ratings/raw/master/compiled/netflix-imdb-ratings.crx), it's a Chrome extension.
-3. Drag the downloaded file into Chrome to the Tools > Extensions page.
-4. Done!
+1. [Download the latest version](https://chrome.google.com/webstore/detail/netflix-imdb-ratings/laclklcdckbolhgghhmffhcpdjobddbf), it's a Chrome extension.
+2. Done!
 
 Donate
 -----------

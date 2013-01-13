@@ -5,12 +5,9 @@
     "content_scripts": [{
 
         "js": [
-
-            // jQuery
             "assets/js/jquery.js",
             "assets/js/jquery.watch-2.0.min.js",
 
-            // FOR SPARTA
             "classes/init.js"
         ],
 
@@ -26,7 +23,6 @@
         "48": "assets/img/icon48.png",
         "128": "assets/img/icon128.png"
     },
-    "update_url": "https://raw.github.com/Geczy/netflix-imdb-ratings/master/source/updates.xml" ,
     "minimum_chrome_version": "17.0",
     "manifest_version": 2
 }
