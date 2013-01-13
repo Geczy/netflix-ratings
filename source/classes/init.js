@@ -85,13 +85,6 @@ function get_title() {
 	return title;
 }
 
-function set_type() {
-	var rating = $('.mpaaRating').text();
-	var duration = $('.duration').text();
-
-	params.mt = (rating.indexOf('TV') != -1 || duration.indexOf('Episode') != -1 || duration.indexOf('Season') != -1 || duration.indexOf('Serie') != -1 ) ? 'TVS' : 'M';
-}
-
 function get_query() {
 	return api_url + '?' + $.param(params);
 }
@@ -107,6 +100,13 @@ function set_year(year) {
 
 function set_title(title) {
 	params.q = title;
+}
+
+function set_type() {
+	var rating = $('.mpaaRating').text();
+	var duration = $('.duration').text();
+
+	params.mt = (rating.indexOf('TV') != -1 || duration.indexOf('Episode') != -1 || duration.indexOf('Season') != -1 || duration.indexOf('Serie') != -1 ) ? 'TVS' : 'M';
 }
 
 function set_rating(rating) {
