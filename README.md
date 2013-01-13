@@ -3,17 +3,17 @@ IMDb ratings for Netflix
 
 Automatically display ratings for TV shows or movies on Netflix.
 
+![imdb rating example](http://mgates.me/pix/20130113004809734.png)
+
 Quick start
 ------------
 
-1. Confirm Chrome > Tools > Extensions > Developer mode is enabled
+You can test that it works without signing up for Netflix by [browsing the free catalog](https://signup.netflix.com/BrowseSelection).
+
+1. Go to Chrome > Tools > Extensions and enable Developer mode
 2. [Download the latest version](https://github.com/Geczy/netflix-imdb-ratings/raw/master/compiled/netflix-imdb-ratings.crx), it's a Chrome extension.
-3. Drag the downloaded file into your Chrome browser.
-4. Done! There's nothing to configure.
-
-Features
-------------
-
+3. Drag the downloaded file into Chrome to the Tools > Extensions page.
+4. Done!
 
 Donate
 -----------
