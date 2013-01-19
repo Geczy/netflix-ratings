@@ -1,28 +1,32 @@
 {
     "name": "Netflix IMDb ratings",
     "description": "Show IMDb ratings for Netflix TV shows and movies. Simply hover over a title to see the rating.",
-    "version": "1.0",
+    "version": "1.1",
     "content_scripts": [{
 
         "js": [
             "assets/js/jquery.js",
             "assets/js/jquery.watch-2.0.min.js",
 
+            "classes/class.imdb.js",
+            "classes/class.netflix.js",
             "classes/init.js"
         ],
 
         "matches": ["*://*.netflix.com/*"]
 
     }],
-    "browser_action": {
-        "default_title": "Netflix IMDb Ratings",
-        "default_icon": "assets/img/icon48.png"
+    "page_action": {
+        "default_title": "Netflix IMDb Ratings"
     },
     "icons": {
         "16": "assets/img/icon16.png",
         "48": "assets/img/icon48.png",
         "128": "assets/img/icon128.png"
     },
+    "permissions": [
+        "storage"
+    ],
     "minimum_chrome_version": "17.0",
     "manifest_version": 2
 }
