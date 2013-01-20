@@ -14,16 +14,29 @@ You can test that it works without signing up for Netflix by [browsing the free 
 2. Done!
 
 Donate
------------
+------------
 
 Want to help support new features and releases? Consider [donating](https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=paypal@mgates.me&item_name=Donation for IMDb extension!) :)
 
 Bug tracker
------------
+------------
 
 Have a bug? Please create an issue here on GitHub!
 
 https://github.com/Geczy/netflix-imdb-ratings/issues
+
+Changelog
+------------
+
+#### 1.1: 2012-01-19
+* New: Cache ratings rather than making new requests
+* Fix: Trim whitespace from titles
+* Tweak: Remove the extension's button in the toolbar
+* Tweak: Reorganize file structure
+* Tweak: Cleaner code with useful helper functions
+
+#### 1.0: 2012-01-19
+* Initial release
 
 Copyright and License
 ---------------------
