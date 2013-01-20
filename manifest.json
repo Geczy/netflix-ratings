@@ -8,8 +8,8 @@
             "assets/js/jquery.js",
             "assets/js/jquery.watch-2.0.min.js",
 
-            "classes/class.imdb.js",
             "classes/class.netflix.js",
+            "classes/class.imdb.js",
             "classes/init.js"
         ],
 

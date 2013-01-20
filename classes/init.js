@@ -2,7 +2,7 @@ var rotten_api = 'http://api.rottentomatoes.com/api/public/v1.0/movies.json?apik
 
 var tries = 0;
 
-$(document).ready(function() {
+function init() {
 
 	$("#BobMovie").watch('display', function() {
 
@@ -20,5 +20,8 @@ $(document).ready(function() {
 
 		set_imdb_rating( title, year );
 	});
+}
 
+$(document).ready(function() {
+	init();
 });

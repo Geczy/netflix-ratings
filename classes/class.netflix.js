@@ -1,4 +1,4 @@
-var ratings = chrome.storage.sync.get('netflix_ratings');
+var ratings = chrome.storage.local.get('netflix_ratings');
 
 function append_row( title, id ) {
 	$('div.info dl').append('<dt>' + title + '</dt><dd id="' + id + '_rating"></dd>')
@@ -33,12 +33,24 @@ function get_title() {
 	return title;
 }
 
-function save_rating( type, title, rating ) {
+function save_rating( title, rating, type ) {
+	if ( ! ratings ) ratings = {};
+
 	if ( ! ratings.hasOwnProperty(type) ){
 		ratings[type] = {}
 	}
 
 	ratings[type][title] = rating;
 
-	chrome.storage.sync.set({'netflix_ratings': ratings});
+	chrome.storage.local.set({'netflix_ratings': ratings});
+}
+
+function get_rating( title, type ) {
+	if ( ! ratings ) ratings = {};
+
+	if ( ! ratings.hasOwnProperty(type) ){
+		ratings[type] = {}
+	}
+
+	return ratings[type][title];
 }

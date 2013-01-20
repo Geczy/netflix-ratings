@@ -12,10 +12,17 @@ function set_imdb_rating( title, year ) {
 	set_imdb_year( year );
 	set_imdb_type();
 
-	imdb_request();
+	// Storage
+	var rating = get_rating(title, 'imdb');
+
+	if ( rating ) {
+		set_rating( rating, 'imdb' );
+	} else {
+		imdb_request( title );
+	}
 }
 
-function imdb_request() {
+function imdb_request( title ) {
 	var query = imdb_api + '?' + $.param(imdb_params);
 
 	$.getJSON(query, function(data) {
@@ -39,8 +46,8 @@ function imdb_request() {
 			tries = 0;
 		}
 
-		set_rating(rating, 'imdb');
-
+		set_rating( rating, 'imdb' );
+		save_rating( title, rating, 'imdb' );
 	});
 }
 
