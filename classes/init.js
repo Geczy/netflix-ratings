@@ -1,7 +1,3 @@
-var rotten_api = 'http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=zretw2x7n25sqsw6q72x8q98&page_limit=1';
-
-var tries = 0;
-
 function init() {
 
 	$("#BobMovie").watch('display', function() {

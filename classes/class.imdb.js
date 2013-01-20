@@ -1,4 +1,5 @@
 var imdb_api = 'http://imdbapi.org/';
+var imdb_tries = 0;
 
 var imdb_params = {
 	type: 'json',
@@ -22,8 +23,8 @@ function imdb_request( title ) {
 
 		if ( !data[0] ) {
 			// Attempt one more try with an empty year
-			if ( !tries ) {
-				tries++;
+			if ( !imdb_tries ) {
+				imdb_tries++;
 				set_imdb_year(false);
 				imdb_request( title );
 
@@ -35,10 +36,10 @@ function imdb_request( title ) {
 			rating = data[0].rating ? data[0].rating.toFixed(1) : 'Not yet rated';
 			rating = '<a target="_TOP" href="' + data[0].imdb_url + '">' + rating + '</a> / 10';
 
-			if ( tries ) {
+			if ( imdb_tries ) {
 				rating += '<br/><br/>(Tried twice to find IMDb rating. May be inaccurate. ' + get_imdb_search_link() + ' to confirm.)';
 			}
-			tries = 0;
+			imdb_tries = 0;
 		}
 
 		set_rating( rating, 'imdb' );
