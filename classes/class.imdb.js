@@ -32,7 +32,9 @@ function imdb_request( title ) {
 			if ( !tries ) {
 				tries++;
 				set_imdb_year(false);
-				imdb_request();
+				imdb_request( title );
+
+				return false;
 			} else {
 				rating = 'Error. ' + get_imdb_search_link();
 			}
