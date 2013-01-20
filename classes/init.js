@@ -18,7 +18,14 @@ function init() {
 		var title = get_title();
 		var year = get_year();
 
-		set_imdb_rating( title, year );
+		// Storage
+		var imdb_rating = get_rating(title, 'imdb');
+
+		if ( imdb_rating ) {
+			set_rating( rating, 'imdb' );
+		} else {
+			find_imdb_rating( title, year );
+		}
 	});
 }
 

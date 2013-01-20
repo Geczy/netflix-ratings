@@ -7,19 +7,12 @@ var imdb_params = {
 	episode: 0,
 };
 
-function set_imdb_rating( title, year ) {
+function find_imdb_rating( title, year ) {
 	set_imdb_title( title );
 	set_imdb_year( year );
 	set_imdb_type();
 
-	// Storage
-	var rating = get_rating(title, 'imdb');
-
-	if ( rating ) {
-		set_rating( rating, 'imdb' );
-	} else {
-		imdb_request( title );
-	}
+	imdb_request( title );
 }
 
 function imdb_request( title ) {
