@@ -19,10 +19,10 @@ function init() {
 		var year = get_year();
 
 		// Storage
-		var imdb_rating = get_rating(title, 'imdb');
+		var imdb_rating = get_rating( title, 'imdb' );
 
 		if ( imdb_rating ) {
-			set_rating( rating, 'imdb' );
+			set_rating( imdb_rating, 'imdb' );
 		} else {
 			find_imdb_rating( title, year );
 		}

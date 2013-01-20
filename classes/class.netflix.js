@@ -1,4 +1,4 @@
-var ratings = chrome.storage.local.get('netflix_ratings');
+var ratings = JSON.parse( localStorage.getItem('netflix_ratings') );
 
 function append_row( title, id ) {
 	$('div.info dl').append('<dt>' + title + '</dt><dd id="' + id + '_rating"></dd>')
@@ -42,7 +42,7 @@ function save_rating( title, rating, type ) {
 
 	ratings[type][title] = rating;
 
-	chrome.storage.local.set({'netflix_ratings': ratings});
+	localStorage.setItem( 'netflix_ratings', JSON.stringify( ratings ) );
 }
 
 function get_rating( title, type ) {
