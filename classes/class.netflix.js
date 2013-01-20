@@ -30,7 +30,7 @@ function get_title() {
 	title = title.replace('(U.K.)', '');
 	title = title.replace('(U.S.)', '');
 
-	return title;
+	return $.trim(title);
 }
 
 function save_rating( title, rating, type ) {
