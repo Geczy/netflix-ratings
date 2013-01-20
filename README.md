@@ -3,8 +3,6 @@
 
 Automatically display ratings for TV shows or movies on Netflix.
 
-![imdb rating example](http://mgates.me/pix/20130113004809734.png)
-
 Quick start
 ------------
 
