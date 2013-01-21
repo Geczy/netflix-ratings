@@ -21,7 +21,7 @@ Bug tracker
 
 Have a bug? Please create an issue here on GitHub!
 
-https://github.com/Geczy/netflix-imdb-ratings/issues
+https://github.com/Geczy/netflix-ratings/issues
 
 Changelog
 ------------
