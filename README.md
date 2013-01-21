@@ -1,4 +1,4 @@
-[IMDb ratings for Netflix](https://github.com/Geczy/netflix-imdb-ratings)
+[IMDb ratings for Netflix](https://github.com/Geczy/netflix-ratings)
 =======================
 
 Automatically display ratings for TV shows or movies on Netflix.
