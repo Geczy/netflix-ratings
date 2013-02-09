@@ -1,7 +1,7 @@
 {
     "name": "Netflix IMDb ratings",
     "description": "Show IMDb ratings for Netflix TV shows and movies. Simply hover over a title to see the rating.",
-    "version": "1.1",
+    "version": "1.1.2",
     "content_scripts": [{
 
         "js": [

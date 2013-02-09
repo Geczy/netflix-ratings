@@ -26,7 +26,7 @@ function get_duration() {
 }
 
 function get_title() {
-	var title = $('.bobMovieHeader > span.title').text();
+	var title = $('.bobMovieHeader span.title').text();
 	title = title.replace('(U.K.)', '');
 	title = title.replace('(U.S.)', '');
 
