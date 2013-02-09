@@ -26,6 +26,9 @@ https://github.com/Geczy/netflix-ratings/issues
 Changelog
 ------------
 
+#### 1.1.2: 2012-02-08
+* Fix: Kept showing that the API was down, couldn't find the Netflix titles
+
 #### 1.1: 2012-01-19
 * New: Cache ratings rather than making new requests
 * Fix: Trim whitespace from titles
