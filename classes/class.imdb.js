@@ -19,31 +19,37 @@ function find_imdb_rating( title, year ) {
 function imdb_request( title ) {
 	var query = imdb_api + '?' + $.param(imdb_params);
 
-	$.getJSON(query, function(data) {
+	$.ajax({
+		url: query,
+		dataType: 'json',
+		success: function( data ) {
+			if ( !data[0] ) {
+				// Attempt one more try with an empty year
+				if ( !imdb_tries ) {
+					imdb_tries++;
+					set_imdb_year(false);
+					imdb_request( title );
 
-		if ( !data[0] ) {
-			// Attempt one more try with an empty year
-			if ( !imdb_tries ) {
-				imdb_tries++;
-				set_imdb_year(false);
-				imdb_request( title );
-
-				return false;
+					return false;
+				} else {
+					rating = 'Error. ' + get_imdb_search_link();
+				}
 			} else {
-				rating = 'Error. ' + get_imdb_search_link();
-			}
-		} else {
-			rating = data[0].rating ? data[0].rating.toFixed(1) : 'Not yet rated';
-			rating = '<a target="_TOP" href="' + data[0].imdb_url + '">' + rating + '</a> / 10';
+				rating = data[0].rating ? data[0].rating.toFixed(1) : 'Not yet rated';
+				rating = '<a target="_TOP" href="' + data[0].imdb_url + '">' + rating + '</a> / 10';
 
-			if ( imdb_tries ) {
-				rating += '<br/><br/>(Tried twice to find IMDb rating. May be inaccurate. ' + get_imdb_search_link() + ' to confirm.)';
+				if ( imdb_tries ) {
+					rating += '<br/><br/>(Tried twice to find IMDb rating. May be inaccurate. ' + get_imdb_search_link() + ' to confirm.)';
+				}
+				imdb_tries = 0;
 			}
-			imdb_tries = 0;
+
+			set_rating( rating, 'imdb' );
+			save_rating( title, rating, 'imdb' );
+		},
+		error: function( data ) {
+			set_rating( 'The IMDb API appears to be offline :/. <a target="_TOP" href="' + query + '">You can confirm so here.</a><br/><br/>All you can do is wait until the API comes back online. Please don\'t hate the extension!', 'imdb' );
 		}
-
-		set_rating( rating, 'imdb' );
-		save_rating( title, rating, 'imdb' );
 	});
 }
 
