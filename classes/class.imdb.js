@@ -1,4 +1,4 @@
-var imdb_api = 'http://imdbapi.org/';
+var imdb_api = 'http://mymovieapi.com/';
 var imdb_tries = 0;
 
 var imdb_params = {
