@@ -7,6 +7,7 @@
         "js": [
             "assets/js/jquery.js",
             "assets/js/jquery.watch-2.0.min.js",
+            "assets/js/lodash.js",
 
             "classes/class.netflix.js",
             "classes/class.imdb.js",
@@ -19,6 +20,9 @@
     "page_action": {
         "default_title": "Netflix IMDb Ratings"
     },
+    "web_accessible_resources": [
+        "assets/js/jquery.min.map"
+    ],    
     "icons": {
         "16": "assets/img/icon16.png",
         "48": "assets/img/icon48.png",

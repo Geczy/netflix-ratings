@@ -1,9 +1,9 @@
 function init() {
 
-	$("#BobMovie").watch('display', function() {
+	jQuery("#BobMovie").watch('display', function() {
 
 		// Don't continue if the tooltip is hidden
-		if ( $(this).css('display') == 'none' ) {
+		if ( jQuery(this).css('display') == 'none' ) {
 			set_rating( '', 'imdb' );
 			return false;
 		}
@@ -25,6 +25,6 @@ function init() {
 	});
 }
 
-$(document).ready(function() {
+jQuery(document).ready(function() {
 	init();
 });
