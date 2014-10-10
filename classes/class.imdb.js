@@ -1,11 +1,12 @@
-var imdb_api = 'http://mymovieapi.com/';
+var imdb_api = 'http://www.omdbapi.com/?tomatoes=true';
+var imdb_url = "http://www.imdb.com/title/"
 var imdb_tries = 0;
 
 var imdb_params = {
-	type: 'json',
-	plot: 'simple',
-	limit: 1,
-	episode: 0,
+	// type: 'json',
+	plot: 'short',
+	// limit: 1,
+	// episode: 0,
 };
 
 function find_imdb_rating( title, year ) {
@@ -16,14 +17,22 @@ function find_imdb_rating( title, year ) {
 	imdb_request( title );
 }
 
-function imdb_request( title ) {
-	var query = imdb_api + '?' + $.param(imdb_params);
+function imdb_details (data) {
+}
 
-	$.ajax({
+function imdb_request( title ) {
+	var query = imdb_api + '&' + jQuery.param(imdb_params);
+
+	jQuery.ajax({
 		url: query,
 		dataType: 'json',
 		success: function( data ) {
-			if ( !data[0] ) {
+
+			match = _.detect(data.Search, function (hit){
+				return hit["Title"] == imdb_params.s;
+			});
+
+			if ( !match ) {
 				// Attempt one more try with an empty year
 				if ( !imdb_tries ) {
 					imdb_tries++;
@@ -35,17 +44,30 @@ function imdb_request( title ) {
 					rating = 'Error. ' + get_imdb_search_link();
 				}
 			} else {
-				rating = data[0].rating ? data[0].rating.toFixed(1) : 'Not yet rated';
-				rating = '<a target="_TOP" href="' + data[0].imdb_url + '">' + rating + '</a> / 10';
 
-				if ( imdb_tries ) {
-					rating += '<br/><br/>(Tried twice to find IMDb rating. May be inaccurate. ' + get_imdb_search_link() + ' to confirm.)';
-				}
+				jQuery.ajax({
+					url : imdb_api + '&' + jQuery.param({i:match.imdbID}),
+					dataType: 'json',
+					success: function( match ) {					
+						rating = match.imdbRating ? match.imdbRating : 'Not yet rated';
+						rating = '<a target="_TOP" href="' + imdb_url + match.imdbID + '">' + rating + '</a> / 10';
+
+						if ( imdb_tries ) {
+							rating += '<br/><br/>(Tried twice to find IMDb rating. May be inaccurate. ' + get_imdb_search_link() + ' to confirm.)';
+						}
+
+						set_rating( rating, 'imdb' );
+						save_rating( title, rating, 'imdb' );
+
+					},
+					error: function( data ) {
+						set_rating( 'The IMDb API appears to be offline :/. <a target="_TOP" href="' + query + '">You can confirm so here.</a><br/><br/>All you can do is wait until the API comes back online. Please don\'t hate the extension!', 'imdb' );
+					}
+				});
+
 				imdb_tries = 0;
 			}
 
-			set_rating( rating, 'imdb' );
-			save_rating( title, rating, 'imdb' );
 		},
 		error: function( data ) {
 			set_rating( 'The IMDb API appears to be offline :/. <a target="_TOP" href="' + query + '">You can confirm so here.</a><br/><br/>All you can do is wait until the API comes back online. Please don\'t hate the extension!', 'imdb' );
@@ -59,15 +81,13 @@ function get_imdb_search_link() {
 
 function set_imdb_year( year ) {
 	if ( year ) {
-		imdb_params.yg = 1;
-		imdb_params.year = year;
+		imdb_params.y = year;
 	} else {
-		imdb_params.yg = 0;
 	}
 }
 
 function set_imdb_title( title ) {
-	imdb_params.q = title;
+	imdb_params.s = title;
 }
 
 function set_imdb_type() {
