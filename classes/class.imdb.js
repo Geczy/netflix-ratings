@@ -3,10 +3,7 @@ var imdb_url = "http://www.imdb.com/title/"
 var imdb_tries = 0;
 
 var imdb_params = {
-	// type: 'json',
 	plot: 'short',
-	// limit: 1,
-	// episode: 0,
 };
 
 function find_imdb_rating( title, year ) {
@@ -29,7 +26,7 @@ function imdb_request( title ) {
 		success: function( data ) {
 
 			match = _.detect(data.Search, function (hit){
-				return hit["Title"] == imdb_params.s;
+				return hit.Title == imdb_params.s;
 			});
 
 			if ( !match ) {
